@@ -11,16 +11,17 @@ CXX_WASM_FLAGS += -std=c++11 -O3 -Wall -fno-exceptions
 KERNELS = bc bfs cc cc_sv pr pr_spmv sssp tc
 SUITE = $(addsuffix .wasm, $(KERNELS))
 
+DIST = dist/gapbs-wasm32-wasi
 
 .PHONY: all
 all: $(SUITE) converter
 
 %.wasm : src/%.cc src/*.h
-	mkdir -p dist & \
-	$(CXX_WASM) $(CXX_WASM_FLAGS) $< -o dist/$@
+	mkdir -p $(DIST) & \
+	$(CXX_WASM) $(CXX_WASM_FLAGS) $< -o $(DIST)/$@
 
 converter: src/converter.cc src/*.h
-	$(CXX) $(CXX_FLAGS) $< -o dist/$@
+	$(CXX) $(CXX_FLAGS) $< -o $@
 
 # Testing
 include test/test.mk
