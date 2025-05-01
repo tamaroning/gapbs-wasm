@@ -11,7 +11,7 @@ CXX_WASM_FLAGS += -std=c++11 -O3 -Wall -fno-exceptions
 KERNELS = bc bfs cc cc_sv pr pr_spmv sssp tc
 SUITE = $(addsuffix .wasm, $(KERNELS))
 
-DIST = dist/gapbs-wasm32-wasi
+DIST = dist
 
 .PHONY: all
 all: $(SUITE) converter
